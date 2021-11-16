@@ -8,6 +8,7 @@ FROM debian:11-slim
 RUN apt update && \
     apt install -y libcurl4
 COPY --from=builder /opt /opt/
-COPY entrypoint.sh /opt/entrypoint.sh
+COPY healthcheck.sh entrypoint.sh /opt/
+HEALTHCHECK CMD /opt/healthcheck.sh
 WORKDIR /opt
 CMD ./entrypoint.sh
