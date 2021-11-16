@@ -1,0 +1,19 @@
+name: Check for new tags
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  check_and_build:
+    name: Check for tags and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Get latest tag and build
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          ./devops/check_and_build_new_tag.sh
