@@ -3,10 +3,13 @@ version: "3"
 services:
   mining:
     image: tarfeef101/raptorminer
-    build:
-      context: .
+    build: .
     logging:
       driver: "json-file"
       options:
         max-size: "200k"
         max-file: "1"
+    #environment:
+      #- THREADS=16
+    #volumes:
+      #- "./tune_config:/opt/tune_config"
